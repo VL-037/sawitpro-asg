@@ -3,9 +3,6 @@ package constant;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.gson.GsonFactory;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Contstant {
     public static final String APPLICATION_NAME = "SawitPro Assignment";
     public static final JsonFactory JSON_FACTORY = GsonFactory.getDefaultInstance();
