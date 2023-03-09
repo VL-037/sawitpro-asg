@@ -1,0 +1,11 @@
+# Ignore Gradle project-specific cache directory
+.gradle
+
+# Ignore Gradle build output directory
+build
+
+# Ignore Google API credentials  tokens directory
+src/main/resources/credentials.json
+
+# Ignore Google Auth tokens directory
+tokens
