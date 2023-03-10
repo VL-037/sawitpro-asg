@@ -1,7 +1,6 @@
 package helper;
 
 import constant.Contstant;
-import org.apache.commons.io.FilenameUtils;
 import org.opencv.core.Mat;
 import org.opencv.imgproc.Imgproc;
 
@@ -17,7 +16,9 @@ public class OCRHelper {
         return thresholdImageMat;
     }
 
-    public static String setOCROutput(java.io.File file) {
-        return Contstant.IMAGE_OCR_OUTPUT_DIRECTORY_PATH + FilenameUtils.removeExtension(file.getName()) + ".html";
+    public static String setOCROutput(java.io.File file, String title) {
+        return Contstant.IMAGE_OCR_OUTPUT_DIRECTORY_PATH
+                + title
+                + ".html";
     }
 }

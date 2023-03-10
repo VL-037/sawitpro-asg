@@ -17,6 +17,8 @@ import org.openqa.selenium.WindowType;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.awt.image.RescaleOp;
+import java.io.File;
+import java.util.List;
 
 public class TesseractClient {
 
@@ -35,10 +37,12 @@ public class TesseractClient {
             String mimeType = FileHelper.getMimeType(file);
             if (FileHelper.isImage(mimeType, file)) {
                 String ocrResult = extractTextFromImages(file);
-                java.io.File outputFile = FileHelper.createOutputFile(file, ocrResult);
+                List<File> outputFiles = FileHelper.createOutputFile(file, ocrResult);
 
-                webDriver.switchTo().newWindow(WindowType.TAB);
-                SeleniumClient.takeOutputFileScreenshot(webDriver, outputFile);
+                outputFiles.forEach(outputFile -> {
+                    webDriver.switchTo().newWindow(WindowType.TAB);
+                    SeleniumClient.takeOutputFileScreenshot(webDriver, outputFile);
+                });
             }
         }
         webDriver.quit();
