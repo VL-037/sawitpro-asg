@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
 
 public class OCRHelper {
 
-    public static Mat tesseractThresholding(BufferedImage image) {
+    public static Mat thresholding(BufferedImage image) {
         Mat imageMat = FileHelper.bufferedImageToMat(image);
         Mat thresholdImageMat = new Mat();
         Imgproc.threshold(imageMat, thresholdImageMat, 0, 255, Imgproc.THRESH_BINARY | Imgproc.THRESH_OTSU);
