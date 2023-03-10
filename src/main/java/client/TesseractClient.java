@@ -47,7 +47,7 @@ public class TesseractClient {
     private static String extractTextFromImages(java.io.File file) {
         Tesseract tesseract = new Tesseract();
         tesseract.setDatapath(Contstant.TESSDATA_DIRECTORY_PATH);
-        tesseract.setLanguage("eng+chi_tra+chi_tra_vert+chi_sim+chi_sim_vert");
+        tesseract.setLanguage("eng+chi_tra+chi_tra_vert");
 
         BufferedImage enhancedImage = enhanceImage(file);
 
@@ -78,12 +78,15 @@ public class TesseractClient {
         ImageDeskew imageDeskew = new ImageDeskew(rawImage);
         BufferedImage rotatedImage = ImageHelper.rotateImage(rawImage, imageDeskew.getSkewAngle());
 
+        int width = rotatedImage.getWidth();
+        int height = rotatedImage.getHeight();
+
         BufferedImage scaledImage = ImageHelper
-                .getScaledInstance(rotatedImage, rotatedImage.getWidth() / 2, rotatedImage.getHeight() / 2);
+                .getScaledInstance(rotatedImage, width * 2, height * 2);
 
         BufferedImage grayScaledImage = ImageHelper.convertImageToGrayscale(scaledImage);
 
-        Mat thresholdImageMat = OCRHelper.tesseractThresholding(grayScaledImage);
+        Mat thresholdImageMat = OCRHelper.thresholding(grayScaledImage);
 
         String enhancedImagePath = Contstant.ENHANCED_IMAGES_DIRECTORY_ABSOLUTE_PATH + file.getName();
         Imgcodecs.imwrite(enhancedImagePath, thresholdImageMat);

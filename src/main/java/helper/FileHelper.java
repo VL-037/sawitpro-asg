@@ -16,8 +16,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.Objects;
 
-import static helper.OCRHelper.setOCROutput;
-
 public class FileHelper {
 
     public static String getMimeType(java.io.File file) {
@@ -83,7 +81,7 @@ public class FileHelper {
             result = result.replaceAll("(\r\n|\n)", "<br />");
             htmlString = htmlString.replace("$body", result);
 
-            java.io.File newHtmlFile = new java.io.File(setOCROutput(file));
+            java.io.File newHtmlFile = new java.io.File(OCRHelper.setOCROutput(file));
             FileUtils.writeStringToFile(newHtmlFile, htmlString);
 
             System.out.println("Text from Image: " + file.getName());
