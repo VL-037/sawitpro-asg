@@ -110,9 +110,7 @@ public class FileHelper {
 
                 files.add(newHtmlFile);
 
-                System.out.println("Text from Image " + language.getLabel() + ": " + file.getName());
-                System.out.println("=========================");
-                System.out.println(text);
+                System.out.println("Output file created " + language.getLabel() + ": " + file.getName());
             } catch (IOException e) {
                 System.err.printf("#createOutputFile ERROR! file: %s, result: %s, errorMessage: %s", file, text, e.getMessage(), e);
                 throw new RuntimeException(e);

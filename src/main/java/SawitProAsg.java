@@ -12,6 +12,7 @@ public class SawitProAsg {
         DirectoryHelper.deleteDirectories();
 
         GoogleClient.createGDrive(credentialsStream);
-        TesseractClient.extractAndTakeScreenshot();
+        TesseractClient.extractTextAndCreateOutput();
+        TesseractClient.screenshotOutput();
     }
 }

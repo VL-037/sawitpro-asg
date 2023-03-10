@@ -24,7 +24,7 @@ public class TesseractClient {
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
     }
 
-    public static void extractAndTakeScreenshot() {
+    public static void extractTextAndCreateOutput() {
         java.io.File inputFolder = new java.io.File(Contstant.IMAGES_DIRECTORY_PATH);
         java.io.File[] listFiles = inputFolder.listFiles();
         DirectoryHelper.createEnhancedImageDirectory();
@@ -36,7 +36,9 @@ public class TesseractClient {
                 FileHelper.createOutputFile(file, ocrResult);
             }
         }
+    }
 
+    public static void screenshotOutput() {
         java.io.File outputFolder = new java.io.File(Contstant.IMAGE_OCR_OUTPUT_DIRECTORY_PATH);
         java.io.File[] outputFiles = outputFolder.listFiles();
 
