@@ -40,6 +40,10 @@ public class FileHelper {
                 && getMimeType(file).split("/")[0].equals("image");
     }
 
+    public static boolean isHTML(String mimeType, java.io.File file) {
+        return Objects.nonNull(mimeType) && mimeType.equals("text/html");
+    }
+
     public static Mat bufferedImageToMat(BufferedImage image) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         try {
