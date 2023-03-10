@@ -24,21 +24,30 @@ public class TesseractClient {
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
     }
 
-    public static void extractAndTakeScreenshot() {
-        java.io.File folder = new java.io.File(Contstant.IMAGES_DIRECTORY_PATH);
-        java.io.File[] listFiles = folder.listFiles();
+    public static void extractTextAndCreateOutput() {
+        java.io.File inputFolder = new java.io.File(Contstant.IMAGES_DIRECTORY_PATH);
+        java.io.File[] listFiles = inputFolder.listFiles();
         DirectoryHelper.createEnhancedImageDirectory();
-
-        WebDriver webDriver = SeleniumClient.initWebDriver();
 
         for (java.io.File file : listFiles) {
             String mimeType = FileHelper.getMimeType(file);
             if (FileHelper.isImage(mimeType, file)) {
                 String ocrResult = extractTextFromImages(file);
-                java.io.File outputFile = FileHelper.createOutputFile(file, ocrResult);
+                FileHelper.createOutputFile(file, ocrResult);
+            }
+        }
+    }
 
+    public static void screenshotOutput() {
+        java.io.File outputFolder = new java.io.File(Contstant.IMAGE_OCR_OUTPUT_DIRECTORY_PATH);
+        java.io.File[] outputFiles = outputFolder.listFiles();
+
+        WebDriver webDriver = SeleniumClient.initWebDriver();
+        for (java.io.File file : outputFiles) {
+            String mimeType = FileHelper.getMimeType(file);
+            if (FileHelper.isHTML(mimeType, file)) {
                 webDriver.switchTo().newWindow(WindowType.TAB);
-                SeleniumClient.takeOutputFileScreenshot(webDriver, outputFile);
+                SeleniumClient.takeOutputFileScreenshot(webDriver, file);
             }
         }
         webDriver.quit();
